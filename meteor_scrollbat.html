@@ -1,0 +1,21 @@
+<head>
+  <title>meteor_scrollbat</title>
+</head>
+
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> canvas}}
+  {{> loginButtons}}
+</body>
+
+<template name="canvas">
+  <button>Click Me</button>
+  
+  <p>You've pressed the button {{counter}} times.</p>
+  {{#if currentUser}}
+  	<span class="text"><strong>{{username}}</strong> - {{text}}</span>
+  {{/if}}
+  	<canvas id="canvas" width="400" height="400" style="border:5px solid #000000;"></canvas>
+  
+</template>
