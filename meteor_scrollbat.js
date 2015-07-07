@@ -41,10 +41,25 @@ if (Meteor.isClient) {
     	// change my color
     	Meteor.call('welcome');
     },
+    'contextmenu #canvas': function(event){
+    	console.log('right button');
+    	Meteor.call('move',5);
+    	return false;
+    },
+    'click #canvas': function(event){
+    	if(event.which == 1){
+    		console.log('left button');
+    		Meteor.call('move',-5);
+    	}    	
+    },
+    'mousedown #canvas': function(event){
+    	event.preventDefault();
+    	console.log('double click');
+    },
     "mousewheel" : function (event){
     	event.preventDefault();
     	console.log('mousewheel fired by '+Meteor.userId());
-    	Meteor.call('move',Math.round((Math.random())*100));
+    	Meteor.call('welcome');
 	}
   });
   
@@ -81,8 +96,11 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-	move: function(new_x){
+	newpos: function(new_x){
 		Players.update({user_id: Meteor.userId()},{$set: {x: new_x, user_id: Meteor.userId()}},{upsert: true});
+	},
+	move: function(delta){
+		Players.update({user_id: Meteor.userId()},{$inc: {x: delta}});
 	},
 	welcome: function(){
 		Players.update({user_id: Meteor.userId()},{$set: {color: '#'+Math.floor(Math.random()*16777215).toString(16), user_id: Meteor.userId()}},{upsert: true});
