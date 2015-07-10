@@ -6,11 +6,25 @@
   <h1>Mortal Scrollbat</h1>
 
   {{> canvas}}
+  {{> gamestate}}
   {{> loginButtons}}
 </body>
 
 <template name="canvas">
   <button>Click Me</button>
+  
   	<canvas id="canvas" width="400" height="400" style="border:5px solid #000000;" oncontextmenu="return false;"></canvas>
   
+</template>
+
+<template name="gamestate">
+	<ul>
+	{{#each players}}
+		{{>player}}
+	{{/each}}
+	</ul>
+</template>
+
+<template name="player">
+	<li><p>{{user_id}} : {{life}} points</p></li>
 </template>

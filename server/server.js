@@ -20,3 +20,7 @@ Meteor.setInterval(function() {/*
       })
     }*/
 }, 10)
+
+Accounts.onLogin(function(user){
+	Players.update({user_id: user.user._id},{$set: {life: 100}},{upsert: true});
+})
