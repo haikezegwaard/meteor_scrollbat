@@ -99,6 +99,12 @@ Accounts.ui.config({
 
 Template.gamestate.helpers({
     players: function () {
-      return Players.find({});
+    	result = [];
+    	Players.find().fetch().forEach(function(player){
+    		user = Meteor.users.findOne({_id: player.user_id})
+    		p = {'username' : user.username, 'life' : player.life}
+    		result.push(p);
+    	});
+    	return result;
     }
 });
