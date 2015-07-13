@@ -17,7 +17,6 @@ gc = function() { //var doesn't work here
 render = function() {
 	gc().clearRect(0, 0, 400, 400);
 	Players.find().fetch().forEach(function(i) {
-
 		if (i.color == undefined) {
 			Meteor.call('welcome');
 		} else {
